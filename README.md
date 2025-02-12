@@ -8,7 +8,7 @@ Note: The current version only works with integer arrays. A floating point imple
 
 You can install the package directly from GitHub using pip:
 
-!pip install git+https://github.com/akos-nagy/fast_walsh_hadamard_transform.git
+`!pip install git+https://github.com/akos-nagy/fast_walsh_hadamard_transform.git`
 
 ## Usage Example
 
