@@ -1,0 +1,7 @@
+Metadata-Version: 2.2
+Name: fast_walsh_hadamard_transform
+Version: 0.1.0
+Summary: Fast Walsh-Hadamard Transform implemented in C++ with OpenMP
+Author: Your Name
+Dynamic: author
+Dynamic: summary
