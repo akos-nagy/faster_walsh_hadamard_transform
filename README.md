@@ -1,2 +1,8 @@
-# fast_walsh_hadamard_transform
-A Python package for Fast Walsh-Hadamard Transform using C++ and OpenMP."
+# Fast Walsh-Hadamard Transform (FWHT)
+
+A high-performance implementation of the Fast Walsh-Hadamard Transform using C++ and Pybind11.
+
+## Installation
+
+```sh
+pip install .
