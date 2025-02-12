@@ -8,7 +8,9 @@ Note: The current version only works with integer arrays. A floating point imple
 
 You can install the package directly from GitHub using pip:
 
-`!pip install git+https://github.com/akos-nagy/fast_walsh_hadamard_transform.git`
+```bash
+pip install git+https://github.com/akos-nagy/fast_walsh_hadamard_transform.git
+```
 
 ## Usage Example
 
@@ -19,7 +21,7 @@ from fast_walsh_hadamard_transform import fwht
 import numpy as np
 
 # Create an array of random integers with length 2^4 = 16
-x = (np.random.rand(2**4) * 10).astype(int)
+x = np.rint(np.random.rand(2**4) * 10)
 # Example array:
 # x = [8, 6, 5, 9, 2, 5, 4, 1, 2, 9, 1, 7, 0, 6, 6, 2]
 
