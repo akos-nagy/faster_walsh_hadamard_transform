@@ -23,12 +23,14 @@ from fast_walsh_hadamard_transform import fwht
 import numpy as np
 
 # Create an array of random integers with length 2^4 = 16
-x = np.rint(np.random.rand(1 << 4) * 10)
+data = np.random.randint(- 10, 10, 1 << 3)
 # Example array:
-# x = [8, 6, 5, 9, 2, 5, 4, 1, 2, 9, 1, 7, 0, 6, 6, 2]
+# data = [ 3,  8,  9,  8, -8,  3,  9,  7]
 
 # Compute the Fast Walsh-Hadamard Transform
-y = fwht(x)
+result = fwht(data)
 # Example output:
-# y = [ 73, -17,   3, -11,  21, -13,   3,  21,  7,  13,  1,  11,  11,   9,  -7,   3]
+# result = [ 39, -13, -27, -19,  17,   5,  15,   7]
+print("Original again\t= ", data)  # Should remain unchanged
+print("Transformed\t= ", result)  # FWHT-transformed output
 ```
