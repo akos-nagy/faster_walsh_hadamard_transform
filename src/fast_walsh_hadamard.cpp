@@ -18,11 +18,11 @@ std::vector<int64_t> fastWalshHadamardTransform(const std::vector<int64_t>& f) {
     std::size_t M = (N >> 1);
     if (parity == 1) {
         #pragma omp parallel for
-        for (size_t idx = 0; idx < M; ++idx) {
-            std::int64_t a = whf[idx << 1];
-            std::int64_t b = whf[(idx << 1) ^ 1];
-            whf[idx << 1] = a + b;
-            whf[(idx << 1) ^ 1] = a - b;
+        for (size_t idx = 0; idx < N; idx += 2) {
+            std::int64_t a = whf[idx];
+            std::int64_t b = whf[idx ^ 1];
+            whf[idx] += b;
+            whf[idx ^ 1] = a - b;
         }
     }
 
