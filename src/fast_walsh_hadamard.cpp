@@ -15,19 +15,47 @@ std::vector<int64_t> fastWalshHadamardTransform(const std::vector<int64_t>& f) {
     std::size_t parity = n&1;
     std::size_t L = (N >> 2);
 
-    std::size_t M = (N >> 1);
     if (parity == 1) {
-        #pragma omp parallel for
-        for (size_t idx = 0; idx < N; idx += 2) {
-            std::int64_t a = whf[idx];
-            std::int64_t b = whf[idx ^ 1];
-            whf[idx] += b;
-            whf[idx ^ 1] = a - b;
+        if (n == 1) {
+            #pragma omp parallel for
+            for (size_t idx = 0; idx < N; idx += 2) {
+                std::int64_t a = whf[idx];
+                std::int64_t b = whf[idx ^ 1];
+                whf[idx] = a + b;
+                whf[idx ^ 1] = a - b;
+            }
+        } else {
+            #pragma omp parallel for
+            for (size_t idx = 0; idx < N; idx += 8) {
+                std::int64_t a1 = whf[idx ^ 1];
+                std::int64_t a2 = whf[idx ^ 2];
+                std::int64_t a3 = whf[idx ^ 3];
+                std::int64_t a4 = whf[idx ^ 4];
+                std::int64_t a5 = whf[idx ^ 5];
+                std::int64_t a6 = whf[idx ^ 6];
+                std::int64_t a7 = whf[idx ^ 7];
+                std::int64_t b0 = a1 + a2;
+                std::int64_t b1 = a3 + a7;
+                std::int64_t b2 = a5 + a6;
+                std::int64_t s = b0 + b1 + b2 + a4;
+                std::int64_t t = whf[idx] - s;
+                std::int64_t c0 = t + (a3 << 1);
+                std::int64_t c1 = t + (a4 << 1);
+                std::int64_t c2 = t + (a7 << 1);
+                whf[idx] += s;
+                whf[idx ^ 1] = c1 + ((a2 + a6) << 1);
+                whf[idx ^ 2] = c1 + ((a1 + a5) << 1);
+                whf[idx ^ 3] = c1 + (b1 << 1);
+                whf[idx ^ 4] = c0 + (b0 << 1);
+                whf[idx ^ 5] = c2 + ((a2 + a5) << 1);
+                whf[idx ^ 6] = c2 + ((a1 + a6) << 1);
+                whf[idx ^ 7] = c0 + (b2 << 1);
+            }
         }
     }
 
     if (n > 1) {
-        for (std::size_t shift = parity; shift < n - 1; shift += 2) {
+        for (std::size_t shift = 3 * parity; shift < n - 1; shift += 2) {
             #pragma omp parallel for
             for (size_t idx = 0; idx < L; ++idx) {
                 std::size_t phase = (idx >> shift)&3; // 0, 1, 2, or 3
