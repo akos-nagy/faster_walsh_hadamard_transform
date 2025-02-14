@@ -71,7 +71,6 @@ std::vector<int64_t> fasterWalshHadamardTransform(const std::vector<int64_t>& f)
             }
         }
     }
-    }
 
     return whf;
 }
