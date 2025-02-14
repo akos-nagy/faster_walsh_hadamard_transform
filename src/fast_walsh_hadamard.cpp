@@ -58,9 +58,8 @@ std::vector<int64_t> fastWalshHadamardTransform(const std::vector<int64_t>& f) {
         for (std::size_t shift = 3 * parity; shift < n - 1; shift += 2) {
             #pragma omp parallel for
             for (size_t idx = 0; idx < L; ++idx) {
-                std::size_t phase = (idx >> shift)&3; // 0, 1, 2, or 3
-                std::size_t jump = phase * L;
-                std::size_t loc_a = idx ^ (phase << shift) ^ jump;
+                std::size_t phase = (idx >> shift)%4;
+                std::size_t loc_a = idx ^ (phase << shift) ^ (phase << k);
                 std::size_t loc_b = loc_a ^ (1 << shift);
                 std::size_t loc_c = loc_a ^ (2 << shift);
                 std::size_t loc_d = loc_c ^ (1 << shift);
