@@ -33,12 +33,12 @@ std::vector<int64_t> fasterWalshHadamardTransform(const std::vector<int64_t>& f)
                 std::int64_t b0 = a1 + a2;
                 std::int64_t b1 = a3 + a7;
                 std::int64_t b2 = a5 + a6;
-                std::int64_t x = b0 + b1 + b2 + a4;
-                whf[idx] += x;
-                x = whf[idx] - x;
-                std::int64_t c0 = x + (a3 << 1);
-                std::int64_t c1 = x + (a4 << 1);
-                std::int64_t c2 = x + (a7 << 1);
+                std::int64_t s = b0 + b1 + b2 + a4;
+                std::int64_t t = whf[idx] - s;
+                std::int64_t c0 = t + (a3 << 1);
+                std::int64_t c1 = t + (a4 << 1);
+                std::int64_t c2 = t + (a7 << 1);
+                whf[idx] += s;
                 whf[idx ^ 1] = c1 + ((a2 + a6) << 1);
                 whf[idx ^ 2] = c1 + ((a1 + a5) << 1);
                 whf[idx ^ 3] = c1 + (b1 << 1);
@@ -54,7 +54,7 @@ std::vector<int64_t> fasterWalshHadamardTransform(const std::vector<int64_t>& f)
         for (std::size_t shift = ((parity) ? 3 : 0); shift <= k; shift += 2) {
             #pragma omp parallel for
             for (size_t idx = 0; idx < L; ++idx) {
-                std::size_t phase = (idx >> shift)%4;
+                std::size_t phase = (idx >> shift)&3;
                 std::size_t loc_a = idx ^ (phase << shift) ^ (phase << k);
                 std::size_t loc_b = loc_a ^ (1 << shift);
                 std::size_t loc_c = loc_a ^ (2 << shift);
@@ -62,14 +62,15 @@ std::vector<int64_t> fasterWalshHadamardTransform(const std::vector<int64_t>& f)
                 std::int64_t b = whf[loc_b];
                 std::int64_t c = whf[loc_c];
                 std::int64_t d = whf[loc_d];
-                std::int64_t x = b + c + d;
-                whf[loc_a] += x;
-                x = whf[loc_a] - x;
-                whf[loc_b] = x + (c << 1);
-                whf[loc_c] = x + (b << 1);
-                whf[loc_d] = x + (d << 1);
+                std::int64_t s = b + c + d;
+                std::int64_t t = whf[loc_a] - s;
+                whf[loc_a] += s;
+                whf[loc_b] = t + (c << 1);
+                whf[loc_c] = t + (b << 1);
+                whf[loc_d] = t + (d << 1);
             }
         }
+    }
     }
 
     return whf;
