@@ -4,7 +4,7 @@ import numpy
 
 ext_modules = [
     Pybind11Extension(
-        "fast_walsh_hadamard_transform",
+        "faster_walsh_hadamard_transform",
         ["src/pybind_wrapper.cpp"],
         extra_compile_args=["-O3", "-fopenmp", "-std=c++17"],
         extra_link_args=["-fopenmp"],
@@ -13,10 +13,10 @@ ext_modules = [
 ]
 
 setup(
-    name="fast_walsh_hadamard_transform",
+    name="faster_walsh_hadamard_transform",
     version="0.1.0",
     author="Your Name",
-    description="Fast Walsh-Hadamard Transform implemented in C++ with OpenMP",
+    description="Fast(er) Walsh-Hadamard Transform implemented in C++ with OpenMP",
     ext_modules=ext_modules,
     cmdclass={"build_ext": build_ext},
     zip_safe=False,

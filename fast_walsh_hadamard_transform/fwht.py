@@ -1,8 +1,8 @@
 import numpy as np
-from .fast_walsh_hadamard_transform import fwht as _fwht_cpp
+from .faster_walsh_hadamard_transform import fwht as _fwht_cpp
 
 def fwht(arr):
-    """Compute the Fast Walsh-Hadamard Transform.
+    """Compute the Fast(er) Walsh-Hadamard Transform.
 
     Args:
         arr (numpy.ndarray or list): Input array, must be a power of 2 in length.

@@ -3,7 +3,7 @@
 #include <omp.h>
 #include <cstdint>
 
-std::vector<int64_t> fastWalshHadamardTransform(const std::vector<int64_t>& f) {
+std::vector<int64_t> fasterWalshHadamardTransform(const std::vector<int64_t>& f) {
     size_t N = f.size();
     if (__builtin_popcount(N) != 1) {
         throw std::runtime_error("Input length must be a power of 2.");
