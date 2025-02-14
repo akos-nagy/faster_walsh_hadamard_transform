@@ -1,6 +1,6 @@
 # Fast(er) Walsh-Hadamard Transform (FWHT)
 
-A high-performance implementation of the Walsh-Hadamard Transform of Josh Alman and Kevin Rao from "Faster Walsh-Hadamard and Discrete Fourier Transforms From Matrix Non-Rigidity" https://dl.acm.org/doi/10.1145/3564246.3585188. For an array for lenght N = 2^n, this method uses only ((7/8) * N * log2(N) + ((n%2)/8) * N) additions and O(N) elementary binary operations. Written in C++, using OpenMP and Pybind11.
+A high-performance implementation of the Walsh-Hadamard Transform of Josh Alman and Kevin Rao from "Faster Walsh-Hadamard and Discrete Fourier Transforms From Matrix Non-Rigidity" https://dl.acm.org/doi/10.1145/3564246.3585188. For an array for lenght N = 2^n, this method uses only (7/8 * log2(N) + O(1)) * N additions and O(N) elementary binary operations. Written in C++, using OpenMP and Pybind11.
 
 Note: The current version only works with integer arrays. Float implementation to be added later.
 
