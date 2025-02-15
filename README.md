@@ -22,6 +22,7 @@ import numpy as np
 
 # Create an array of random integers with length 2^4 = 16
 data = np.random.randint(- 10, 10, 1 << 3)
+print("Original data\t= ", data)
 # Example array:
 # data = [ 3,  8,  9,  8, -8,  3,  9,  7]
 
