@@ -1,6 +1,6 @@
 # Fast(er) Walsh&ndash;Hadamard Transform
 
-A high-performance implementation of *Faster Walsh&ndash;Hadamard and Discrete Fourier Transforms From Matrix Non-Rigidity* by Josh Alman and Kevin Rao [DOI](https://dl.acm.org/doi/10.1145/3564246.3585188). For an array for lenght $N = 2^n$, this method uses only $\left( \frac{7}{8} \log_2 (N) + O(1) \right) N$ additions and $O(N)$ elementary binary operations. Written in C++, using OpenMP and Pybind11.
+A high-performance implementation of *Faster Walsh&ndash;Hadamard and Discrete Fourier Transforms From Matrix Non-Rigidity* by Josh Alman and Kevin Rao [DOI](https://dl.acm.org/doi/10.1145/3564246.3585188). For an array for lenght $N = 2^n$, this method uses only $\left( \frac{11}{12} \log_2 (N) + \frac{1}{12} \right) N + o(N)$ additions and $\frac{1}{24} \log_2 (N) N + o(N)$ elementary binary operations. Written in C++, using OpenMP and Pybind11.
 
 Note: The current version only works with integer arrays. Float implementation to be added later.
 
