@@ -41,10 +41,10 @@ from faster_walsh_hadamard_transform import fwht
 import numpy as np
 
 def fwht_float(data, scale=1 << 40):
-    return fwht(np.rint(f * scale)) / scale
+    return fwht(np.rint(data * scale)) / scale
 
 data = np.array([-0.57727239, 0.56031148, 0.6037531, -0.18076892, -0.04983009, -0.23033542, 0.57870502, 0.56614574])
 result = fwht_float(data)
 # result = np.array([1.27070853, -0.15999724, -1.86496135, -1.75415983, -0.45866198, -0.54612644, 0.98507117, -2.09005194])
 ```
-Testing suggests that the $L^2$ error of ```fwht_float``` is $O \left( \tfrac{2^n}{\mathrm{scale}} \right)$.
+Testing suggests that the $L^2$ error of ```fwht_float``` for an array of lenght $2^n$ is $O \left( \tfrac{2^n}{\mathrm{scale}} \right)$.
